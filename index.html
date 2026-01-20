@@ -1,0 +1,162 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pabolu Venkata Subrahmanya Dheeraj - Cyberpunk Portfolio</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="hud-header">
+    <div class="hud-logo">DHEERAJ</div>
+    <nav class="hud-nav">
+      <ul>
+        <li><a href="#identity" data-target="identity">IDENTITY</a></li>
+        <li><a href="#skills" data-target="skills">SKILLS</a></li>
+        <li><a href="#projects" data-target="projects">PROJECTS</a></li>
+        <li><a href="#education" data-target="education">EDUCATION</a></li>
+        <li><a href="#certifications" data-target="certifications">CERTIFICATIONS</a></li>
+        <li><a href="#contact" data-target="contact">CONTACT</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section id="identity" class="panel identity-panel active">
+      <div class="panel-content">
+        <h1 class="panel-title">PABOLU VENKATA SUBRAHMANYA DHEERAJ</h1>
+        <p class="panel-subtitle">Cyberpunk UI / Front-End Engineer</p>
+        <div class="identity-details">
+          <p>CARRIER OBJECTIVE:</p>
+          <p>Work for an organization that provides me the opportunity to improve my skills and knowledge to grow along with the organization’s objective.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills" class="panel skills-panel">
+      <div class="panel-content">
+        <h2 class="panel-title">TECHNICAL STRENGTHS</h2>
+        <ul class="skills-list">
+          <li><strong>Programming Languages:</strong> Python 3, Java</li>
+          <li><strong>Frameworks:</strong> Flask, Spring Boot, React js</li>
+          <li><strong>Web Technologies:</strong> HTML, CSS, Tailwindcss</li>
+          <li><strong>Database:</strong> Structured Query Language (SQL)</li>
+          <li><strong>Web Tools:</strong> Github, Git</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="projects" class="panel projects-panel">
+      <div class="panel-content">
+        <h2 class="panel-title">PROJECTS</h2>
+        <div class="project-item">
+          <h3>Full-Stack Firebase User Portfolio System</h3>
+          <p>Developed user authentication, profile management, and file upload features using Firebase Authentication, Realtime Database & Storage.</p>
+          <p>Built a clean and responsive UI using HTML and CSS to ensure user-friendly interface.</p>
+          <p>Created an admin dashboard in Flask to manage user lifecycle (CRUD operations), leading to clean and structured data handling.</p>
+        </div>
+        <div class="project-item">
+          <h3>Representation and Symbols of Nucleotide Sequence Data</h3>
+          <p>Developed a tool that converts any input text into a DNA-base sequence (A, C, G, T) and displays the output in four distinct colours.</p>
+        </div>
+        <div class="project-item">
+          <h3>Resume to Portfolio Generator</h3>
+          <p>Built a full-stack application using React (Vite) and Flask that converts resume PDFs into AI-generated, responsive portfolio websites.</p>
+          <p>Automated deployment by integrating GitHub APIs to create repositories, upload HTML/CSS files, and deliver a live GitHub Pages link within seconds.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="education" class="panel education-panel">
+      <div class="panel-content">
+        <h2 class="panel-title">EDUCATION</h2>
+        <div class="education-item">
+          <h3>Bachelor of Engineering, Computer Science and Engineering</h3>
+          <p>R . M . D E n g i n e e r i n g C o l l e g e , C h e n n a i</p>
+          <p>2022 - 2026 | CGPA: 7.70*</p>
+        </div>
+        <div class="education-item">
+          <h3>Higher Secondary School</h3>
+          <p>N a r a y a n a J r . c o l l e g e , N e l l o r e</p>
+          <p>2020 - 2022 | Percentage: 92.6</p>
+        </div>
+        <div class="education-item">
+          <h3>Secondary Education</h3>
+          <p>V i v e k a n a n d a H . S</p>
+          <p>2020 | Percentage: 76.17</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="certifications" class="panel certifications-panel">
+      <div class="panel-content">
+        <h2 class="panel-title">CERTIFICATIONS</h2>
+        <ul class="certifications-list">
+          <li>DATA BASE MANAGEMENT SYSTEM - NPTEL</li>
+          <li>Responsive Web Design - freeCodeCamp</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="contact" class="panel contact-panel">
+      <div class="panel-content">
+        <h2 class="panel-title">CONTACT</h2>
+        <ul class="contact-list">
+          <li><strong>Location:</strong> B-11-582, Chennuru road, Buchi reddy palem</li>
+          <li><strong>Phone:</strong> (+91)7032671918</li>
+          <li><strong>Email:</strong> subrahmanyadheeraj1918@gmail.com</li>
+          <li><strong>Portfolio:</strong> <a href="https://dheeraj1918.github.io/portfolio/" target="_blank">dheeraj1918.github.io/portfolio/</a></li>
+          <li><strong>GitHub:</strong> <a href="https://github.com/dheeraj1918" target="_blank">github.com/dheeraj1918</a></li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="hud-footer">
+    <div class="footer-status">SYSTEM ONLINE</div>
+    <div class="footer-credits">DESIGNED BY DHEERAJ</div>
+  </footer>
+
+  <script>
+    const panels = document.querySelectorAll('.panel');
+    const navLinks = document.querySelectorAll('.hud-nav a');
+
+    navLinks.forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+
+        const targetId = this.getAttribute('data-target');
+        const targetPanel = document.getElementById(targetId);
+
+        panels.forEach(panel => {
+          panel.classList.remove('active');
+        });
+
+        if (targetPanel) {
+          targetPanel.classList.add('active');
+        }
+
+        navLinks.forEach(navLink => navLink.classList.remove('active'));
+        this.classList.add('active');
+      });
+    });
+
+    // Optional: Add a subtle glitch effect on hover for nav links
+    navLinks.forEach(link => {
+      link.addEventListener('mouseover', () => {
+        link.classList.add('glitch-effect');
+      });
+      link.addEventListener('mouseout', () => {
+        link.classList.remove('glitch-effect');
+      });
+    });
+
+    // Initial active state for the first link
+    if (navLinks.length > 0) {
+      navLinks[0].classList.add('active');
+    }
+  </script>
+</body>
+</html>
