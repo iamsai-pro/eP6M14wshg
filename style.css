@@ -1,0 +1,369 @@
+
+/* General Body & HUD Styling */
+body {
+    margin: 0;
+    font-family: 'Orbitron', 'Courier New', Courier, monospace;
+    background-color: #0a0a0a;
+    color: #00ffff;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    overflow-x: hidden;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    position: relative;
+    z-index: 0;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(10, 10, 10, 0.8) 50%, rgba(20, 0, 30, 0.8) 50%);
+    background-size: 2px 2px;
+    z-index: -1;
+    pointer-events: none;
+    animation: glitch-grid 15s linear infinite;
+}
+
+@keyframes glitch-grid {
+    0% { background-position: 0 0; }
+    10% { background-position: 5px 5px; }
+    20% { background-position: -5px -5px; }
+    30% { background-position: 0 0; }
+    40% { background-position: 3px -3px; }
+    50% { background-position: -3px 3px; }
+    60% { background-position: 0 0; }
+    70% { background-position: -2px 2px; }
+    80% { background-position: 2px -2px; }
+    90% { background-position: 0 0; }
+    100% { background-position: 0 0; }
+}
+
+.container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    position: relative;
+    z-index: 2;
+}
+
+/* HUD Elements */
+.hud-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background: rgba(0, 0, 0, 0.7);
+    border-bottom: 1px solid #00ffff;
+    box-shadow: 0 2px 10px rgba(0, 255, 255, 0.3);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    width: 100%;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+}
+
+.hud-logo {
+    font-size: 1.8em;
+    font-weight: bold;
+    color: #ff00ff;
+    text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff;
+    letter-spacing: 2px;
+}
+
+.hud-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+.hud-nav li {
+    margin-left: 25px;
+}
+
+.hud-nav a {
+    text-decoration: none;
+    color: #00ffff;
+    font-size: 1.1em;
+    font-weight: bold;
+    padding: 8px 15px;
+    border: 1px solid transparent;
+    transition: all 0.3s ease-in-out;
+    position: relative;
+    text-shadow: 0 0 5px rgba(0, 255, 255, 0.7);
+    display: inline-block; /* For hover effects */
+}
+
+.hud-nav a:hover,
+.hud-nav a.active {
+    color: #ffffff;
+    border-color: #00ffff;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.7), inset 0 0 10px rgba(0, 255, 255, 0.5);
+    transform: translateY(-3px);
+}
+
+.hud-nav a.active {
+    background-color: rgba(0, 255, 255, 0.1);
+}
+
+.hud-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background: rgba(0, 0, 0, 0.7);
+    border-top: 1px solid #00ffff;
+    box-shadow: 0 -2px 10px rgba(0, 255, 255, 0.3);
+    z-index: 10;
+    width: 100%;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    font-size: 0.9em;
+    color: #00dddd;
+}
+
+.footer-status {
+    text-shadow: 0 0 5px rgba(0, 221, 221, 0.7);
+}
+
+.footer-credits {
+    text-shadow: 0 0 5px rgba(0, 221, 221, 0.7);
+}
+
+
+/* Panels Styling */
+.panel {
+    background: rgba(0, 0, 0, 0.75);
+    border: 1px solid rgba(0, 255, 255, 0.3);
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
+    padding: 40px;
+    margin: 20px;
+    width: 80%;
+    max-width: 800px;
+    text-align: left;
+    opacity: 0;
+    transform: translateY(50px) scale(0.95);
+    transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out, box-shadow 0.3s ease-in-out;
+    position: absolute; /* Allows overlapping */
+    z-index: 1;
+    visibility: hidden;
+    pointer-events: none;
+    border-radius: 10px;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+.panel.active {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    visibility: visible;
+    pointer-events: auto;
+    z-index: 5; /* Bring active panel to front */
+    box-shadow: 0 0 30px rgba(0, 255, 255, 0.7), 0 0 10px rgba(255, 0, 255, 0.5);
+}
+
+.panel-content {
+    max-height: 70vh;
+    overflow-y: auto;
+    padding-right: 15px; /* Space for scrollbar if needed */
+}
+
+.panel-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.panel-content::-webkit-scrollbar-track {
+    background: rgba(0, 255, 255, 0.1);
+    border-radius: 10px;
+}
+
+.panel-content::-webkit-scrollbar-thumb {
+    background: #00ffff;
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
+}
+
+.panel-title {
+    font-size: 2.5em;
+    margin-bottom: 25px;
+    color: #ffffff;
+    text-shadow: 0 0 15px rgba(0, 255, 255, 0.8);
+    letter-spacing: 3px;
+    border-bottom: 2px solid #ff00ff;
+    padding-bottom: 10px;
+}
+
+.panel-subtitle {
+    font-size: 1.2em;
+    color: #00dddd;
+    margin-bottom: 20px;
+    text-shadow: 0 0 5px rgba(0, 221, 221, 0.7);
+}
+
+/* Specific Panel Content */
+.identity-details p,
+.skills-list li,
+.project-item p,
+.education-item p,
+.certifications-list li,
+.contact-list li {
+    font-size: 1.1em;
+    line-height: 1.7;
+    margin-bottom: 15px;
+    color: #eeeeee;
+    text-shadow: 0 0 3px rgba(238, 238, 238, 0.5);
+}
+
+.identity-details p:first-of-type,
+.project-item h3,
+.education-item h3,
+.skills-list li strong,
+.contact-list li strong {
+    color: #ffffff;
+    font-weight: bold;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.7);
+    margin-bottom: 10px;
+}
+
+.project-item h3,
+.education-item h3 {
+    font-size: 1.4em;
+    color: #00ffff;
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
+}
+
+.contact-list a {
+    color: #00ffff;
+    text-decoration: none;
+    text-shadow: 0 0 5px rgba(0, 255, 255, 0.7);
+    transition: color 0.3s ease;
+}
+
+.contact-list a:hover {
+    color: #ffffff;
+    text-shadow: 0 0 10px #ffffff;
+}
+
+/* Glitch Effect for Nav Links */
+@keyframes glitch {
+    0% { transform: translate(0); }
+    20% { transform: translate(-3px, 3px); }
+    40% { transform: translate(-3px, -3px); }
+    60% { transform: translate(3px, 3px); }
+    80% { transform: translate(3px, -3px); }
+    100% { transform: translate(0); }
+}
+
+.glitch-effect {
+    animation: glitch 0.3s linear infinite;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hud-header {
+        flex-direction: column;
+        padding: 15px;
+    }
+
+    .hud-logo {
+        margin-bottom: 15px;
+        font-size: 1.5em;
+    }
+
+    .hud-nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .hud-nav li {
+        margin: 5px 0;
+    }
+
+    .panel {
+        width: 95%;
+        padding: 25px;
+        margin: 15px auto;
+        transform: none; /* Reset transform for mobile */
+        position: static; /* Stack panels */
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        margin-bottom: 20px; /* Add space between stacked panels */
+    }
+
+    .panel.active {
+        transform: none; /* Ensure active panels are not transformed */
+        z-index: 1; /* Remove elevated z-index for stacked panels */
+    }
+
+    .container {
+        padding: 10px;
+        align-items: flex-start; /* Align panels to the left when stacked */
+    }
+
+    .panel-title {
+        font-size: 1.8em;
+    }
+
+    .panel-content {
+        max-height: unset;
+        overflow-y: visible;
+        padding-right: 0;
+    }
+
+    .hud-footer {
+        flex-direction: column;
+        text-align: center;
+        padding: 10px;
+    }
+
+    .footer-status, .footer-credits {
+        margin-bottom: 5px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hud-logo {
+        font-size: 1.2em;
+    }
+
+    .hud-nav a {
+        font-size: 0.95em;
+        padding: 6px 10px;
+    }
+
+    .panel-title {
+        font-size: 1.6em;
+    }
+
+    .identity-details p,
+    .skills-list li,
+    .project-item p,
+    .education-item p,
+    .certifications-list li,
+    .contact-list li {
+        font-size: 1em;
+    }
+}
+
+/* Font Imports (if not using system fonts) */
+/* You'd typically link these in the HTML <head> */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Russo+One&display=swap');
+
+body {
+    font-family: 'Orbitron', 'Courier New', Courier, monospace;
+}
+
+.hud-logo, .panel-title {
+    font-family: 'Russo One', sans-serif;
+}
